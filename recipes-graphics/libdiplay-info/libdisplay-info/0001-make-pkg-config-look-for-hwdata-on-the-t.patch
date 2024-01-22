@@ -1,0 +1,22 @@
+From 298232354f691bc175b20034f29a83d123aa6d21 Mon Sep 17 00:00:00 2001
+From: Kristian Gunstone <kristian.gunstone@ipec.co.uk>
+Date: Thu, 18 Jan 2024 15:21:56 +0000
+Subject: [PATCH] make pkg-config look for hwdata on the target rather than host
+
+---
+ meson.build | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/meson.build b/meson.build
+index 25731c0..3b8c889 100644
+--- a/meson.build
++++ b/meson.build
+@@ -12,7 +12,7 @@ project(
+ 
+ assert(meson.project_version().split('.')[0] == '0')
+ 
+-dep_hwdata = dependency('hwdata', required: false, native: true)
++dep_hwdata = dependency('hwdata', required: false, native: false)
+ if dep_hwdata.found()
+ 	hwdata_dir = dep_hwdata.get_variable(pkgconfig: 'pkgdatadir')
+ 	pnp_ids = files(hwdata_dir / 'pnp.ids')

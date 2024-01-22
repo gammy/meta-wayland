@@ -7,7 +7,8 @@ BUGTRACKER = "https://gitlab.freedesktop.org/wlroots/wlroots/-/issues"
 SECTION = "graphics"
 LICENSE = "MIT"
 
-LIC_FILES_CHKSUM = "file://LICENSE;md5=7578fad101710ea2d289ff5411f1b818"
+# 0.17.1:
+LIC_FILES_CHKSUM = "file://LICENSE;md5=89e064f90bcb87796ca335cbd2ce4179"
 
 REQUIRED_DISTRO_FEATURES = "wayland"
 
@@ -19,6 +20,10 @@ DEPENDS += " \
 	wayland \
 	wayland-native \
 	wayland-protocols \
+    hwdata \
+    pkgconfig \
+    pkgconfig-native \
+    libdisplay-info \
 "
 
 PACKAGECONFIG[examples] = "-Dexamples=true,-Dexamples=false"
@@ -39,9 +44,13 @@ PACKAGECONFIG ?= " \
 	libinput \
 "
 
-SRC_URI = "git://gitlab.freedesktop.org/wlroots/wlroots.git;branch=0.15;protocol=https"
-SRCREV = "29938b74251e826f3778f6bf9c54974a30488cc1"
-PV = "0.15.1"
+SRC_URI = "git://gitlab.freedesktop.org/wlroots/wlroots.git;branch=0.17;protocol=https \
+           file://0001-backend-drm-make-pkg-config-look-for-hwdata-on-the-t.patch \
+           "
+# 0.17.1:
+SRCREV = "3f2aced8c6fd00b0b71da24c790850af2004052b"
+
+PV = "0.17.1"
 
 S = "${WORKDIR}/git"
 

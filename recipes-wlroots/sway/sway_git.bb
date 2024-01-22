@@ -18,7 +18,7 @@ DEPENDS += " \
 	libinput \
 	libxkbcommon \
 	pango \
-	pcre \
+	libpcre2 \
 	pixman \
 	virtual/libgles2 \
 	wayland \
@@ -36,12 +36,11 @@ RRECOMMENDS:${PN} ?= " \
 	wl-clipboard \
 "
 
-SRC_URI = " \
-	git://github.com/swaywm/sway.git;protocol=https;branch=v1.7 \
-"
+SRC_URI = "git://github.com/swaywm/sway.git;protocol=https;branch=v1.9"
 
-SRCREV = "5543acff06981639086bc9a0fc9b608796a23e84"
-PV = "1.7"
+SRCREV = "2bba8a861885d770d1cd081ec22567e4de5e991a"
+
+PV = "1.9"
 S = "${WORKDIR}/git"
 
 inherit meson pkgconfig features_check
@@ -67,9 +66,13 @@ CFLAGS:append = " -Wno-error=date-time"
 EXTRA_OEMESON += "--buildtype release"
 
 do_install:append() {
-	install -m 755 ${S}/contrib/grimshot ${D}${bindir}
-	install -m 755 ${S}/contrib/autoname-workspaces.py ${D}${bindir}
-	install -m 755 ${S}/contrib/inactive-windows-transparency.py ${D}${bindir}
+    # The below commented out contrib scripts appear to have been moved out
+    # of the sway repo. I found them here:
+    # https://github.com/OctopusET/sway-contrib which may or may not be the
+    # new upstream. Leaving this as a TODO for now. // gammy
+	#install -m 755 ${S}/contrib/grimshot ${D}${bindir}
+	#install -m 755 ${S}/contrib/autoname-workspaces.py ${D}${bindir}
+	#install -m 755 ${S}/contrib/inactive-windows-transparency.py ${D}${bindir}
 }
 
 FILES:${PN}:append = " \

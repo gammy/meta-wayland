@@ -1,0 +1,22 @@
+From 96c644957712f8bf4f09204eb8fb15a426f5c920 Mon Sep 17 00:00:00 2001
+From: Kristian Gunstone <kristian.gunstone@ipec.co.uk>
+Date: Fri, 12 Jan 2024 11:02:19 +0000
+Subject: [PATCH] write_jpg: fix compiler error: zu was used on unsigned long
+
+---
+ write_jpg.c | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/write_jpg.c b/write_jpg.c
+index 4476f5f..0cb57d3 100644
+--- a/write_jpg.c
++++ b/write_jpg.c
+@@ -54,7 +54,7 @@ int write_to_jpeg_stream(pixman_image_t *image, FILE *stream, int quality) {
+ 	size_t written = fwrite(data, 1, len, stream);
+ 	if (written < len) {
+ 		free(data);
+-		fprintf(stderr, "Failed to write jpg; only %zu of %zu bytes written\n",
++		fprintf(stderr, "Failed to write jpg; only %zu of %lu bytes written\n",
+ 			written, len);
+ 		return -1;
+ 	}

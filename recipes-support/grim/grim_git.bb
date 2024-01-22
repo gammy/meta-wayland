@@ -19,7 +19,9 @@ DEPENDS += " \
 	wayland-protocols \
 "
 
-SRC_URI = "git://github.com/emersion/grim.git;protocol=https;branch=master"
+SRC_URI = "git://github.com/emersion/grim.git;protocol=https;branch=master \
+           file://0001-write_jpg-fix-compiler-error-zu-was-used-on-unsigned.patch \
+           "
 
 S = "${WORKDIR}/git"
 PV = "1.3.2"

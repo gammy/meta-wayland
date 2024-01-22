@@ -1,0 +1,23 @@
+From 79d7881592b3513459fe0823205e64047d1c4b3d Mon Sep 17 00:00:00 2001
+From: Kristian Gunstone <kristian.gunstone@ipec.co.uk>
+Date: Thu, 18 Jan 2024 15:26:45 +0000
+Subject: [PATCH] backend/drm: make pkg-config look for hwdata on the target
+ rather than host
+
+---
+ backend/drm/meson.build | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/backend/drm/meson.build b/backend/drm/meson.build
+index 6fcb2c15..5fb88122 100644
+--- a/backend/drm/meson.build
++++ b/backend/drm/meson.build
+@@ -1,7 +1,7 @@
+ hwdata = dependency(
+ 	'hwdata',
+ 	required: 'drm' in backends,
+-	native: true,
++	native: false,
+ 	not_found_message: 'Required for the DRM backend.',
+ )
+ 
